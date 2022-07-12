@@ -47,7 +47,7 @@ class Solution {
 
 Solution 2 - Sorting
 TC - O(n log n)
-SC - O(n)
+SC - O(1)
 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
