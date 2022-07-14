@@ -53,7 +53,7 @@ class Solution {
 
 Solution 2 - HashMap
 TC - O(n)
-SC - O(n)
+SC - O(1)
 
 class Solution {
     public boolean isAnagram(String s, String t) {
