@@ -65,3 +65,48 @@ class Solution {
         return result; 
     }
 }
+
+----------------------------------------------------
+
+Solution 2 - 
+TC - O(n)
+SC - O(n)
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<>();
+        
+        // base condition
+        if(strs == null || strs.length == 0)
+            return result;
+        
+        // logic
+        
+        HashMap<HashMap<Character, Integer>, List<String>> map = new HashMap<>();
+        
+        for(String s : strs)
+        {
+            // generate my values for map
+            HashMap<Character, Integer> charMap = new HashMap<>();
+            for(char c: s.toCharArray())
+            {
+                charMap.put(c, charMap.getOrDefault(c, 0) + 1);
+            }
+            
+            if(!map.containsKey(charMap))
+            {
+                map.put(charMap, new ArrayList<>());
+            }
+            map.get(charMap).add(s);
+        }
+        
+        // forming my result set
+        for(HashMap<Character, Integer> key: map.keySet())
+        {
+            result.add(map.get(key));
+        }
+        
+        return result;
+        
+    }
+}
