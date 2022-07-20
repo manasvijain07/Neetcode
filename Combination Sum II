@@ -1,0 +1,129 @@
+Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note: The solution set must not contain duplicate combinations.
+
+ 
+
+Example 1:
+
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+Example 2:
+
+Input: candidates = [2,5,2,1,2], target = 5
+Output: 
+[
+[1,2,2],
+[5]
+]
+ 
+
+Constraints:
+
+1 <= candidates.length <= 100
+1 <= candidates[i] <= 50
+1 <= target <= 30
+
+---------------------------------------
+
+Solution 1 - choose not choose  --> time limit exceeded
+TC - O(2 ^ (m * n))
+SC - O(m * n)
+
+class Solution {
+    Set<List<Integer>> result;
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        result = new HashSet<>();
+        
+        if(candidates == null || candidates.length == 0)
+        {
+            return null;
+        }
+        
+        Arrays.sort(candidates);
+        helper(candidates, target, 0, new ArrayList<>());
+        return new ArrayList<>(result);
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> path)
+    {
+        if(target == 0)
+        {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        
+        if(index == candidates.length)
+            return;
+        
+        // choose
+        if(target >= candidates[index])
+        {
+            path.add(candidates[index]);
+            helper(candidates, target - candidates[index], index + 1, path);
+            path.remove(path.size() - 1);
+        }
+        
+        // not choose
+        helper(candidates, target, index + 1, path);
+        return;
+    }
+}
+
+
+-------------------------------------
+
+Solution 2 - for loop based recursion
+TC - 
+SC - 
+
+class Solution {
+    Set<List<Integer>> result;
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        result = new HashSet<>();
+        
+        if(candidates == null || candidates.length == 0)
+        {
+            return null;
+        }
+        
+        Arrays.sort(candidates);
+        helper(candidates, target, 0, new ArrayList<>());
+        return new ArrayList<>(result);
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> path)
+    {
+        if(target == 0)
+        {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        
+        if(index == candidates.length)
+            return;
+        
+        // choose
+        for(int i = index; i < candidates.length; i++)
+        {
+            if(i > index && candidates[i] == candidates[index])
+                continue;
+            if(target >= candidates[i])
+            {
+                path.add(candidates[i]);
+                helper(candidates, target - candidates[i], i + 1, path);
+                path.remove(path.size() - 1);
+            }
+        }
+        
+        return;
+    }
+}
