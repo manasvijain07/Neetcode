@@ -43,8 +43,8 @@ class Solution {
 }
 
 Solution 2 - for loop based
-TC - 
-SC - 
+TC - O(2^(m * n))
+SC - O(m * n)
 
 class Solution {
     List<List<Integer>> result;
