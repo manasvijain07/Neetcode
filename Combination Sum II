@@ -82,8 +82,18 @@ class Solution {
 -------------------------------------
 
 Solution 2 - for loop based recursion
-TC - 
-SC - 
+
+TC - O(2 ^ n)
+our algorithm will exhaust all possible combinations from the input array, which in total amounts to 2^N
+The sorting will take O(NlogN).
+To sum up, the overall time complexity of the algorithm is dominated by the backtracking process, which is O(2^N) 
+
+ 
+SC - O(n) 
+We use the variable "path" to keep track of the current combination we build, which requires O(N) space.
+In addition, we apply recursion in the algorithm, which will incur additional memory consumption in the function call stack. 
+In the worst case, the stack will pile up to \mathcal{O}(N)O(N) space.
+To sum up, the overall space complexity of the algorithm is O(N) + O(N) = O(N).
 
 class Solution {
     Set<List<Integer>> result;
