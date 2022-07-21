@@ -1,0 +1,90 @@
+Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,2]
+Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+Example 2:
+
+Input: nums = [0]
+Output: [[],[0]]
+ 
+
+Constraints:
+
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+
+-----------------------------------------------
+
+Solution 1 - Using set
+TC - O(2 ^ n)
+SC - O(n)
+
+class Solution {
+    Set<List<Integer>> set;
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        set = new HashSet<>();
+        Arrays.sort(nums);
+        helper(nums, 0, new ArrayList<>());
+        return new ArrayList<>(set);
+    }
+    
+    public void helper(int[] nums, int index, List<Integer> path)
+    {
+        set.add(new ArrayList<>(path));
+        //base case
+        if(index == nums.length)
+        {
+            return;
+        }
+        
+        for(int i = index; i < nums.length; i++)
+        {
+            path.add(nums[i]);
+            helper(nums, i + 1, path);
+            path.remove(path.size() - 1);
+        }
+        return;
+    }
+}
+
+Solution 2 - using list
+TC - O(2 ^ n)
+SC - O(n)
+
+class Solution {
+    List<List<Integer>> list;
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        list = new ArrayList<>();
+        Arrays.sort(nums);
+        helper(nums, 0, new ArrayList<>());
+        return list;
+    }
+    
+    public void helper(int[] nums, int index, List<Integer> path)
+    {
+        if(!list.contains(path))
+        {
+            list.add(new ArrayList<>(path));
+        }
+        
+        //base case
+        if(index == nums.length)
+        {
+            return;
+        }
+        
+        for(int i = index; i < nums.length; i++)
+        {
+            path.add(nums[i]);
+            helper(nums, i + 1, path);
+            path.remove(path.size() - 1);
+        }
+        return;
+    }
+}
