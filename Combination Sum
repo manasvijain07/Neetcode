@@ -1,7 +1,44 @@
+Solution 1 - Exhastive 0/1 - 
+TC - O(2 ^(m * n))
+SC - O(2 ^ (m * n))
+
+class Solution {
+    List<List<Integer>> result;
+    
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        result = new ArrayList<>();
+        helper(candidates, target, 0, new ArrayList<>());
+        return result;
+    }
+    
+    public void helper(int[] candidates, int target, int index, List<Integer> path)
+    {
+        // base case
+        if(target == 0)
+        {
+            result.add(path);
+            return;
+        }
+        
+        if(target < 0 || index == candidates.length)
+        {
+            return;
+        }
+        
+        // choose
+        List<Integer> temp = new ArrayList<>(path);
+        temp.add(candidates[index]);
+        helper(candidates, target - candidates[index], index, temp);
+        
+        // not choose
+        helper(candidates, target, index + 1, path);
+    }
+}
 
 
+------------------------------
 
-Solution 1 - Backtracking - 
+Solution 2 - Backtracking - 
 TC - O(2 ^ (m * n)) where m = candidates.lenth, n = target
 SC - O(m * n)
 
@@ -41,8 +78,9 @@ class Solution {
         return;
     }
 }
+------------------------------------
 
-Solution 2 - for loop based
+Solution 3 - for loop based
 TC - O(2^(m * n))
 SC - O(m * n)
 
