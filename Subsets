@@ -53,6 +53,41 @@ Solution 2 - Backtracking
 TC - O(n * 2^n)
 SC - O(n)
 
+
+class Solution {
+    List<List<Integer>> res;
+    public List<List<Integer>> subsets(int[] nums) {
+        res = new ArrayList<>();
+        helper(nums, 0, new ArrayList<>());
+        return res;
+    }
+    
+    public void helper(int[] nums, int index, List<Integer> path)
+    {
+        // base case
+        if(index == nums.length)
+        {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        
+        // choose
+        path.add(nums[index]);
+        helper(nums, index + 1, path);
+        path.remove(path.size() - 1);
+        
+        // not choose
+        helper(nums, index + 1, path);
+    }
+}
+
+-----------------------------------------
+
+Solution 3 - for loop based backtracking
+TC - O(n * 2^n)
+SC - O(n)
+
+
 class Solution {
     List<List<Integer>> result;
     public List<List<Integer>> subsets(int[] nums) {
